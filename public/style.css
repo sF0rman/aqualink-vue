@@ -1,0 +1,52 @@
+:root {
+    --primary: #56a8da;
+    --secondary: #315469;
+    --primary-light: #9bc6e0;
+    --dark: #323232;
+    --light: #fefefe;
+    --navHeight: 64px;
+}
+
+div, a, input, textarea, button {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-size: clamp(1rem, 1vw, 1.05rem);
+}
+
+#app {
+    width: 100%;
+}
+
+.wrapper {
+    display: inherit;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1em;
+    height: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+button{
+    cursor: pointer;
+    font-size: .9em;
+    border-radius: .7em 0 .7em 0;
+    padding: .66em .9em;
+    border: var(--secondary) solid 1px;
+    background-color: var(--primary-light);
+}
+button:hover {
+    background-color: var(--primary);
+}

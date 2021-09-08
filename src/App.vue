@@ -1,26 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="shell">
+    <navigation />
+    <!-- Router Outlet -->
+    <router-view />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Navigation from "./components/Navigation.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { Navigation },
+  name: "App",
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#shell {
+  margin-top: var(--navHeight);
+}
+.page {
+  padding-top: 2em;
+}
+.landing {
+  width: 100%;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50%;
+  background-image: url("~@/assets/landing.png");
 }
 </style>
