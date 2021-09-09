@@ -25,6 +25,9 @@ button {
     background-color: var(--secondary);
     color: var(--light);
 }
+button:hover {
+  background-color: var(--secondary-dark);
+}
 
 @media screen and (max-width: 650px) {
   .slogan {

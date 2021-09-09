@@ -57,11 +57,12 @@ export default {
 }
 .listitem {
   width: 100%;
-  padding: 0.9rem 1.4rem;
 }
 .listitem > a {
-  background: none;
+  display: block;
+  width: 100%;
   color: inherit;
+  padding: 0.9rem 1.4rem;
   border-bottom: none;
 }
 .listitem:hover {
@@ -85,7 +86,7 @@ export default {
     border: none;
     margin: 0;
   }
-  .listitem {
+  .listitem > a {
     padding: 1.2em 1.5em;
   }
 }
