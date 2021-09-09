@@ -1,29 +1,37 @@
 <template>
   <div id="shell">
-    <navigation />
+    <Navigation />
     <!-- Router Outlet -->
     <router-view />
   </div>
+  <FooterEl />
 </template>
 
 <script>
+import FooterEl from "./components/FooterElement.vue";
 import Navigation from "./components/Navigation.vue";
 export default {
-  components: { Navigation },
+  components: { Navigation, FooterEl },
   name: "App",
 };
 </script>
 
 <style>
 #shell {
-  margin-top: var(--navHeight);
+  padding-top: var(--navHeight);
+  min-height: calc(100vh - var(--footerHeight));
+}
+#shell:last-child {
+  margin-bottom: 2em;
 }
 .page {
   padding-top: 2em;
+  overflow: hidden;
 }
 .landing {
+  box-sizing: border-box;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--navHeight));
   background-attachment: fixed;
   background-size: cover;
   background-position: 50%;

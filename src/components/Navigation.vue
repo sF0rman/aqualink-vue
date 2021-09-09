@@ -2,19 +2,31 @@
   <div id="nav">
     <div class="wrapper">
       <div class="menu">
-        <img src="../assets/logo.png" />
+        <router-link to="/" class="no-highlight"
+          ><img src="../assets/logo.png"
+        /></router-link>
         <div class="navlinks" :class="drawerOpen ? 'open' : ''">
-          <button class="mobile drawer" v-on:click="toggleDrawer">-</button>
-          <router-link class="navitem" to="/">
+          <button
+            class="mobile drawer"
+            :class="drawerOpen ? 'open' : ''"
+            v-on:click="toggleDrawer"
+          >
+            <i :class="drawerOpen ? 'fas fa-times' : 'fas fa-bars'" />
+          </button>
+          <router-link class="navitem" to="/" v-on:click="close">
             <i class="fas fa-home" /> Home
           </router-link>
-          <router-link class="navitem" to="/products">
-            <i class="fas fa-dharmachakra" /> Products
-          </router-link>
-          <router-link class="navitem" to="/about">
+          <dropdown-list
+            title="Products"
+            link="/products"
+            :items="this.items"
+            :close="this.close"
+            icon="fas fa-dharmachakra"
+          />
+          <router-link class="navitem" to="/about" v-on:click="close">
             <i class="fas fa-briefcase" /> About
           </router-link>
-          <router-link class="navitem" to="/contact">
+          <router-link class="navitem" to="/contact" v-on:click="close">
             <i class="fas fa-envelope" /> Contact
           </router-link>
         </div>
@@ -25,14 +37,30 @@
 </template>
 
 <script>
+import DropdownList from "./Items/DropdownList.vue";
 export default {
+  components: { DropdownList },
   name: "Navigation",
   data() {
-    return { drawerOpen: false };
+    return {
+      drawerOpen: false,
+      items: [
+        { name: "Plow Anchor Series", link: "/plow-anchor" },
+        { name: "Seine Net Weight", link: "/seine-net-weight" },
+        { name: "Thimble with Pearklink", link: "/thimble-with-pearlink" },
+        { name: "Polyurethane Thimbles", link: "/polyurethane-thimbles" },
+        { name: "Pearlink", link: "/pearlink" },
+        { name: "Mooring Shackles", link: "/mooring-shackles" },
+        { name: "Strap/Roundsling", link: "/strap-roundsling" },
+      ],
+    };
   },
   methods: {
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen;
+    },
+    close() {
+      this.drawerOpen = false;
     },
   },
 };
@@ -70,9 +98,8 @@ export default {
 .navitem:hover {
   color: var(--primary);
   background-color: var(--light);
-  border-bottom: solid 1px var(--secondary);
 }
-.menu > img {
+.menu > a > img {
   height: 90%;
 }
 
@@ -80,19 +107,25 @@ export default {
   background-color: var(--primary-light);
   border-bottom: solid 1px var(--secondary);
 }
-
+.no-highlight {
+  background: none;
+  border-left: none !important;
+}
 .mobile {
   display: none;
 }
 
-@media screen and (max-width: 800px) {
-  .mobile {
-    top: 1em;
-  }
+@media screen and (max-width: 850px) {
   .drawer {
     display: block;
     position: absolute;
-    left: -50px;
+    left: -52px;
+    font-size: 1.1rem;
+    top: .8rem;
+  }
+  .drawer.open {
+    background-color: red;
+    border-radius: 0 1em 0 1em;
   }
   .navlinks {
     transition: 0.2s;
@@ -110,20 +143,20 @@ export default {
     right: 0;
   }
   .navitem:hover {
-      border: none;
+    border: none;
   }
   .router-link-active {
     border-bottom: none;
     border-left: solid 1px var(--secondary);
   }
   .lang {
-      transition: .2s;
-      position: fixed;
-      bottom: 1em;
-      right: -5em;
+    transition: 0.2s;
+    position: fixed;
+    bottom: 1em;
+    right: -5em;
   }
   .lang.open {
-      right: 1em;
+    right: 1em;
   }
 }
 </style>

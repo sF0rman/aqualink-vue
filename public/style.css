@@ -1,13 +1,15 @@
 :root {
-    --primary: #56a8da;
+    --primary: #56a8db;
     --secondary: #315469;
     --primary-light: #9bc6e0;
+    --secondary-dark: #1e2529;
     --dark: #323232;
     --light: #fefefe;
-    --navHeight: 64px;
+    --navHeight: 4vh;
+    --footerHeight: 120px;
 }
 
-div, a, input, textarea, button {
+div, span, a, input, textarea, button, footer {
     box-sizing: border-box;
 }
 
@@ -15,11 +17,25 @@ html, body {
     width: 100%;
     margin: 0;
     font-family: Avenir, Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 1vw, 1.05rem);
+    font-size: clamp(.9rem, .75vw, 1.5rem);
+}
+
+h1, h2, h3 {
+    color: var(--secondary)
 }
 
 #app {
     width: 100%;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    height: var(--footerHeight);
+    background-color: var(--secondary-dark);
+    color: var(--light)
 }
 
 .wrapper {
@@ -27,7 +43,7 @@ html, body {
     margin: 0 auto;
     height: 100%;
     width: 100%;
-    max-width: 1200px;
+    max-width: 80%;
     padding: 0 1em;
     height: inherit;
     justify-content: inherit;
@@ -41,12 +57,24 @@ a {
 
 button{
     cursor: pointer;
-    font-size: .9em;
+    font-size: .9rem;
     border-radius: .7em 0 .7em 0;
-    padding: .66em .9em;
+    padding: .66em 1em;
     border: var(--secondary) solid 1px;
-    background-color: var(--primary-light);
+    background-color: var(--primary);
 }
 button:hover {
-    background-color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+@media screen and (max-width: 1250px) {
+    .wrapper {
+        max-width: 99%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    :root {
+        --navHeight: 65px;
+    }
 }

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Slogan from "../components/Slogan.vue";
+import Slogan from "../components/Items/Slogan.vue";
 export default {
   components: { Slogan },
   name: "Home",

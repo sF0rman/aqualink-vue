@@ -14,7 +14,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .slogan {
     border-radius: .7em;
     border-left: solid .7em var(--secondary);
@@ -24,5 +24,11 @@ export default {};
 button {
     background-color: var(--secondary);
     color: var(--light);
+}
+
+@media screen and (max-width: 650px) {
+  .slogan {
+    width: 100%;
+  }
 }
 </style>
