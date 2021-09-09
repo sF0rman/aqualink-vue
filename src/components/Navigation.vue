@@ -98,6 +98,7 @@ export default {
 .navitem:hover {
   color: var(--primary);
   background-color: var(--light);
+  border-bottom: solid 1px var(--secondary);
 }
 .menu > a > img {
   height: 90%;
