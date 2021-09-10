@@ -17,7 +17,7 @@
             <i class="fas fa-home" /> Home
           </router-link>
           <dropdown-list
-            v-if="products"
+            v-if="products && products.length"
             title="Products"
             link="/products"
             :items="products"
@@ -34,14 +34,14 @@
       </div>
       <div class="lang" :class="drawerOpen ? 'open' : ''">
         <i class="fas fa-globe-europe" />&nbsp;
-        <span v-if="!norsk"
-          ><b>EN</b> |
-          <span class="cursor" @click="selectLanguage('no')">NO</span></span
-        >
-        <span v-if="norsk"
-          ><span class="cursor" @click="selectLanguage('en')">EN</span> |
-          <b>NO</b></span
-        >
+        <span v-if="!norsk">
+          <b>EN</b> |
+          <span class="cursor" @click="selectLanguage('nb')">NB</span>
+        </span>
+        <span v-if="norsk">
+          <span class="cursor" @click="selectLanguage('en')">EN</span> |
+          <b>NB</b>
+        </span>
       </div>
     </div>
   </div>
@@ -54,10 +54,10 @@ export default {
   name: "Navigation",
   data() {
     return {
-      drawerOpen: false
+      drawerOpen: false,
     };
   },
-  inject: ['products', 'norsk', 'selectLanguage'],
+  inject: ["products", "norsk", "selectLanguage"],
   methods: {
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen;
@@ -132,7 +132,7 @@ export default {
     border-radius: 0 1em 0 1em;
   }
   .navlinks {
-    transition: .2s;
+    transition: 0.2s;
     background-color: var(--light);
     flex-direction: column;
     position: fixed;

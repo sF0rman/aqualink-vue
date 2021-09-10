@@ -6,9 +6,9 @@
     </router-link>
     <div class="list">
       <div class="listitem" v-for="item in items" :key="item.name">
-        <router-link :to="item.link" :key="item.name" v-on:click="close">{{
-          item.name
-        }}</router-link>
+        <router-link :to="item.url" :key="item.name" v-on:click="close">
+          {{ item.title }}
+        </router-link>
       </div>
     </div>
   </div>
