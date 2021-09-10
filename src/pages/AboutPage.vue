@@ -2,7 +2,8 @@
   <div class="page">
     <div class="wrapper">
       <h1>{{ norsk ? "Om " : "About " }}Aqualink</h1>
-      <p v-html="render(text)"></p>
+      <p v-if="!loading" v-html="render(text)"></p>
+      <p v-else>Loading...</p>
     </div>
   </div>
 </template>
@@ -15,6 +16,7 @@ export default {
   data() {
     return {
       text: "",
+      loading: false
     };
   },
   inject: ["norsk"],
@@ -28,6 +30,7 @@ export default {
       return marked(x);
     },
     getData() {
+      this.loading = true;
       axios
         .get(`${api.url}/about`, {
           params: {
@@ -35,7 +38,8 @@ export default {
           },
         })
         .then((res) => (this.text = res.data.text))
-        .catch(api.handleError());
+        .catch(api.handleError())
+        .finally(() => this.loading = false);
     },
   },
   mounted() {
