@@ -8,11 +8,39 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
 import FooterEl from "./components/FooterElement.vue";
 import Navigation from "./components/Navigation.vue";
 export default {
   components: { Navigation, FooterEl },
   name: "App",
+  data() {
+    return {
+      products: [
+        { name: "Plow Anchor Series", link: "/plow-anchor" },
+        { name: "Seine Net Weight", link: "/seine-net-weight" },
+        { name: "Thimble with Pearklink", link: "/thimble-with-pearlink" },
+        { name: "Polyurethane Thimbles", link: "/polyurethane-thimbles" },
+        { name: "Pearlink", link: "/pearlink" },
+        { name: "Mooring Shackles", link: "/mooring-shackles" },
+        { name: "Strap/Roundsling", link: "/strap-roundsling" },
+      ],
+      lang: localStorage.getItem("languange") ?? "en",
+    };
+  },
+  provide() {
+    return {
+      products: this.products,
+      norsk: computed(() => this.lang === "no"),
+      selectLanguage: this.selectLanguage,
+    };
+  },
+  methods: {
+    selectLanguage(value) {
+      this.lang = value;
+      window.localStorage.setItem("language", this.lang);
+    },
+  },
 };
 </script>
 

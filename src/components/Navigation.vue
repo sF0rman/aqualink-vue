@@ -2,9 +2,9 @@
   <div id="nav">
     <div class="wrapper">
       <div class="menu">
-        <router-link to="/" class="no-highlight"
-          ><img src="../assets/logo.png"
-        /></router-link>
+        <router-link to="/" class="no-highlight">
+          <img src="../assets/logo.png" />
+        </router-link>
         <div class="navlinks" :class="drawerOpen ? 'open' : ''">
           <button
             class="mobile drawer"
@@ -17,9 +17,10 @@
             <i class="fas fa-home" /> Home
           </router-link>
           <dropdown-list
+            v-if="products"
             title="Products"
             link="/products"
-            :items="this.items"
+            :items="products"
             :close="this.close"
             icon="fas fa-dharmachakra"
           />
@@ -31,30 +32,32 @@
           </router-link>
         </div>
       </div>
-      <div class="lang" :class="drawerOpen ? 'open' : ''">EN | NO</div>
+      <div class="lang" :class="drawerOpen ? 'open' : ''">
+        <i class="fas fa-globe-europe" />&nbsp;
+        <span v-if="!norsk"
+          ><b>EN</b> |
+          <span class="cursor" @click="selectLanguage('no')">NO</span></span
+        >
+        <span v-if="norsk"
+          ><span class="cursor" @click="selectLanguage('en')">EN</span> |
+          <b>NO</b></span
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import DropdownList from "./Items/DropdownList.vue";
+import DropdownList from "./items/DropdownList.vue";
 export default {
   components: { DropdownList },
   name: "Navigation",
   data() {
     return {
-      drawerOpen: false,
-      items: [
-        { name: "Plow Anchor Series", link: "/plow-anchor" },
-        { name: "Seine Net Weight", link: "/seine-net-weight" },
-        { name: "Thimble with Pearklink", link: "/thimble-with-pearlink" },
-        { name: "Polyurethane Thimbles", link: "/polyurethane-thimbles" },
-        { name: "Pearlink", link: "/pearlink" },
-        { name: "Mooring Shackles", link: "/mooring-shackles" },
-        { name: "Strap/Roundsling", link: "/strap-roundsling" },
-      ],
+      drawerOpen: false
     };
   },
+  inject: ['products', 'norsk', 'selectLanguage'],
   methods: {
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen;
@@ -98,7 +101,7 @@ export default {
 .navitem:hover {
   color: var(--primary);
   background-color: var(--light);
-  border-bottom: solid 1px var(--secondary);
+  border-bottom: solid 1px var(--primary);
 }
 .menu > a > img {
   height: 90%;
@@ -122,14 +125,14 @@ export default {
     position: absolute;
     left: -52px;
     font-size: 1.1rem;
-    top: .8rem;
+    top: 0.8rem;
   }
   .drawer.open {
     background-color: red;
     border-radius: 0 1em 0 1em;
   }
   .navlinks {
-    transition: 0.2s;
+    transition: .2s;
     background-color: var(--light);
     flex-direction: column;
     position: fixed;
@@ -145,16 +148,17 @@ export default {
   }
   .navitem:hover {
     border: none;
+    border-left: solid 1px var(--primary);
   }
   .router-link-active {
     border-bottom: none;
     border-left: solid 1px var(--secondary);
   }
   .lang {
-    transition: 0.2s;
+    transition: 0.4s;
     position: fixed;
     bottom: 1em;
-    right: -5em;
+    right: -5.5em;
   }
   .lang.open {
     right: 1em;

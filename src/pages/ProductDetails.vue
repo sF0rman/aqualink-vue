@@ -1,13 +1,18 @@
 <template>
-  <div class="page"></div>
+  <div class="page">
+      Product Details
+  </div>
 </template>
 
 <script>
 export default {
   name: "product-details",
-  data() {
-    return { url: String };
+  props: {
+      url: String
   },
+  watch: {
+
+  }
 };
 </script>
 

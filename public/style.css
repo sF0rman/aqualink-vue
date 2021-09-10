@@ -51,8 +51,12 @@ footer {
 }
 
 a {
+    cursor: pointer;
     color: var(--primary);
     text-decoration: none;
+}
+.cursor{
+    cursor: pointer;
 }
 
 button{

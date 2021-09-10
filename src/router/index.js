@@ -17,7 +17,10 @@ const routes = [
     },
     {
         path: '/:url',
-        component: ProductDetails
+        component: ProductDetails,
+        props: {
+            url: route => {route.path}
+        }
     },
     {
         path: '/about',
