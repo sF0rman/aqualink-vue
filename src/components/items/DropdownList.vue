@@ -1,8 +1,10 @@
 <template>
   <div class="dropdown">
     <router-link class="navitem" :to="link" v-on:click="close">
-      <i v-if="icon" :class="icon" /> {{ title }}
-      <i class="fas fa-caret-down" />
+      <span>
+        <i v-if="icon" :class="icon" /> {{ title }}
+        <i class="fas fa-caret-down" />
+      </span>
     </router-link>
     <div class="list">
       <div class="listitem" v-for="item in items" :key="item.name">
@@ -35,9 +37,8 @@ export default {
   align-items: inherit;
 }
 .dropdown > .navitem {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
+  height: 100%;
+  display: flex;
 }
 .list {
   background: var(--dark);
