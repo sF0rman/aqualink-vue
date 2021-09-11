@@ -29,6 +29,19 @@ h1, h2, h3 {
     width: 100%;
 }
 
+#shell {
+    padding-top: clamp(58px, 4vh, 4vh);
+    min-height: calc(100vh - var(--footerHeight));
+}
+
+#shell:last-child {
+    margin-bottom: 2em;
+}
+
+.page {
+    overflow: hidden;
+}
+
 .fas {
     margin-right: .3em;
 }
@@ -60,11 +73,12 @@ a {
     color: var(--primary);
     text-decoration: none;
 }
-.cursor{
+
+.cursor {
     cursor: pointer;
 }
 
-button{
+button {
     cursor: pointer;
     font-size: .9rem;
     border-radius: .7em 0 .7em 0;
@@ -72,6 +86,7 @@ button{
     border: var(--secondary) solid 1px;
     background-color: var(--primary);
 }
+
 button:hover {
     background-color: var(--primary-light);
 }

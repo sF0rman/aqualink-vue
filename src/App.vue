@@ -53,17 +53,6 @@ export default {
 </script>
 
 <style>
-#shell {
-  padding-top: var(--navHeight);
-  min-height: calc(100vh - var(--footerHeight));
-}
-#shell:last-child {
-  margin-bottom: 2em;
-}
-.page {
-  padding-top: 3rem;
-  overflow: hidden;
-}
 .landing {
   box-sizing: border-box;
   width: 100%;
@@ -72,5 +61,21 @@ export default {
   background-size: cover;
   background-position: 50%;
   background-image: url("~@/assets/landing.png");
+  padding-top: 3em;
+}
+.banner {
+  width: 100vw;
+  height: 33vh;
+  min-height: 200px;
+  background-color: var(--primary);
+  background-image: url("~@/assets/landing.png");
+  background-size: cover;
+  background-position: 50%;
+  margin: 0 0 2em;
+}
+.banner > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

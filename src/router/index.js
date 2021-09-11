@@ -18,9 +18,7 @@ const routes = [
     {
         path: '/:url',
         component: ProductDetails,
-        props: {
-            url: route => {route.path}
-        }
+        props: true
     },
     {
         path: '/about',
