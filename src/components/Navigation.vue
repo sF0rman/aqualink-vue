@@ -28,7 +28,7 @@
             <i class="fas fa-briefcase" /> About
           </router-link>
           <router-link class="navitem" to="/contact" v-on:click="close">
-            <i class="fas fa-envelope" /> Contact
+            <span><i class="fas fa-envelope" /> Contact</span>
           </router-link>
         </div>
       </div>
@@ -78,6 +78,7 @@ export default {
   display: flex;
   justify-content: space-between;
   height: var(--navHeight);
+  min-height: var(--navMinHeight);
   background-color: var(--light);
   border-bottom: 1px solid black;
 }
@@ -91,8 +92,9 @@ export default {
 }
 .navitem,
 .lang {
+  display: flex;
+  align-items: center;
   padding: 0 1em;
-  line-height: var(--navHeight);
   color: var(--dark);
 }
 .lang {
@@ -102,6 +104,9 @@ export default {
   color: var(--primary);
   background-color: var(--light);
   border-bottom: solid 1px var(--primary);
+}
+.menu {
+  height: 100%;
 }
 .menu > a > img {
   height: 90%;
@@ -131,6 +136,9 @@ export default {
     background-color: red;
     border-radius: 0 1em 0 1em;
   }
+  .drawer > i {
+    margin: 0;
+  }
   .navlinks {
     transition: 0.2s;
     background-color: var(--light);
@@ -145,6 +153,9 @@ export default {
   }
   .navlinks.open {
     right: 0;
+  }
+  .navitem {
+    height: 4em;
   }
   .navitem:hover {
     border: none;
