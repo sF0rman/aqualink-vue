@@ -61,7 +61,7 @@ export default {
   margin-bottom: 2em;
 }
 .page {
-  padding-top: 2em;
+  padding-top: 3rem;
   overflow: hidden;
 }
 .landing {
