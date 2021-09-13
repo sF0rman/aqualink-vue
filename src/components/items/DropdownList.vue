@@ -77,6 +77,9 @@ export default {
     display: block;
     width: 100%;
   }
+  .dropdown > .navitem {
+    height: 4em;
+  }
   .list {
     max-height: 70vh;
     overflow-y: auto;
