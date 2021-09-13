@@ -1,11 +1,23 @@
 <template>
   <div class="page">
     <div class="banner">
-      <img v-if="product && product.cover" :src="api.url + product.cover" alt="" />
+      <img
+        v-if="product && product.cover"
+        :src="apiUrl + product.cover.url"
+        alt=""
+      />
     </div>
     <div v-if="product" class="wrapper">
       <h1>{{ product.title }}</h1>
       <p v-html="render(product.description)"></p>
+      <div v-if="product.tables.length" class="card">
+        <Table
+          :header="product.tables[0].header"
+          :data="product.tables[0].data"
+          :title="product.tables[0].title"
+          :footnote="product.tables[0].footnote"
+        />
+      </div>
     </div>
     <div v-if="loading" class="wrapper">Loading...</div>
   </div>
@@ -14,14 +26,17 @@
 <script>
 import api from "@/api";
 import marked from "marked";
+import Table from "../components/items/Table.vue";
 export default {
   name: "product-details",
   data() {
     return {
       product: null,
       loading: false,
+      apiUrl: 'http://localhost:1337'
     };
   },
+  components: { Table },
   inject: ["locale"],
   props: {
     url: String,
@@ -46,9 +61,12 @@ export default {
   },
   mounted() {
     this.getProductData();
-  },
+  }
 };
 </script>
 
 <style>
+.banner {
+  object-fit: cover;
+}
 </style>
