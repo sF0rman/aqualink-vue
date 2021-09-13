@@ -34,11 +34,11 @@
       </div>
       <div class="lang" :class="drawerOpen ? 'open' : ''">
         <i class="fas fa-globe-europe" />&nbsp;
-        <span v-if="!norsk">
+        <span v-if="locale === 'en'">
           <b>EN</b> |
           <span class="cursor" @click="selectLanguage('nb')">NB</span>
         </span>
-        <span v-if="norsk">
+        <span v-if="locale === 'nb'">
           <span class="cursor" @click="selectLanguage('en')">EN</span> |
           <b>NB</b>
         </span>
@@ -57,7 +57,7 @@ export default {
       drawerOpen: false,
     };
   },
-  inject: ["products", "norsk", "selectLanguage"],
+  inject: ["products", "locale", "selectLanguage"],
   methods: {
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen;

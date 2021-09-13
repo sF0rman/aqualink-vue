@@ -12,7 +12,6 @@ import { computed } from "@vue/reactivity";
 import FooterEl from "./components/FooterElement.vue";
 import Navigation from "./components/Navigation.vue";
 import api from "@/api";
-import axios from "axios";
 export default {
   components: { Navigation, FooterEl },
   name: "App",
@@ -25,25 +24,18 @@ export default {
   provide() {
     return {
       products: computed(() => this.products),
-      norsk: computed(() => this.lang === "nb"),
+      locale: computed(() => this.lang),
       selectLanguage: this.selectLanguage,
     };
   },
   methods: {
     selectLanguage(value) {
       this.lang = value;
-      window.localStorage.setItem("language", this.lang);
+      api.setLocale(value);
       this.getProducts();
     },
-    getProducts() {
-      axios
-        .get(`${api.url}/products`, {
-          params: {
-            _locale: this.lang,
-          },
-        })
-        .then((res) => (this.products = res.data))
-        .catch(api.handleError());
+    async getProducts() {
+      this.products = await api.get('products');
     },
   },
   mounted() {

@@ -78,6 +78,13 @@ a {
     cursor: pointer;
 }
 
+input {
+    font-size: .9rem;
+    border-radius: .7em 0 .7em 0;
+    padding: .66em 1em;
+    border: var(--secondary) solid 1px;
+}
+
 button {
     cursor: pointer;
     font-size: .9rem;

@@ -1,48 +1,47 @@
 <template>
   <div class="page">
-    <div v-if="product">
-      <div class="banner">
-        <img v-if="product.banner" :src="product.banner" alt="">
-      </div>
-      <div class="wrapper">
-        <h1>{{ product.title }}</h1>
-        <p>{{ product.description }}</p>
-      </div>
+    <div class="banner">
+      <img v-if="product && product.cover" :src="api.url + product.cover" alt="" />
     </div>
-    <div v-else class="wrapper">Loading...</div>
+    <div v-if="product" class="wrapper">
+      <h1>{{ product.title }}</h1>
+      <p v-html="render(product.description)"></p>
+    </div>
+    <div v-if="loading" class="wrapper">Loading...</div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import api from "@/api";
+import marked from "marked";
 export default {
   name: "product-details",
   data() {
     return {
-      lang: "en",
       product: null,
+      loading: false,
     };
   },
-  inject: ["norsk"],
+  inject: ["locale"],
   props: {
     url: String,
   },
   watch: {
-    norsk() {
+    locale() {
+      this.getProductData();
+    },
+    url() {
       this.getProductData();
     },
   },
   methods: {
-    getProductData() {
-      axios
-        .get(`${api.url}/products/${this.url}`, {
-          params: {
-            _locale: localStorage.getItem("language") ?? "en",
-          },
-        })
-        .then((res) => (this.product = res.data))
-        .catch(api.handleError());
+    async getProductData() {
+      this.loading = true;
+      this.product = await api.get(`products/${this.url}`);
+      this.loading = false;
+    },
+    render(x) {
+      return marked(x);
     },
   },
   mounted() {

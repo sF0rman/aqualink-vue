@@ -1,27 +1,29 @@
 <template>
   <div class="page">
+    <div class="banner">
+      <img v-if="data && data.banner" :src="data.banner.url" alt="" />
+    </div>
     <div class="wrapper">
-      <h1>{{ norsk ? "Om " : "About " }}Aqualink</h1>
-      <p v-if="!loading" v-html="render(text)"></p>
+      <h1>{{ locale === 'nb' ? "Om " : "About " }}Aqualink</h1>
+      <p v-if="!loading && data.text" v-html="render(data.text)"></p>
       <p v-else>Loading...</p>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import api from "@/api";
 import marked from "marked";
 export default {
   data() {
     return {
-      text: "",
-      loading: false
+      data: {},
+      loading: false,
     };
   },
-  inject: ["norsk"],
+  inject: ["locale"],
   watch: {
-    norsk() {
+    locale(val) {
       this.getData();
     },
   },
@@ -29,17 +31,10 @@ export default {
     render(x) {
       return marked(x);
     },
-    getData() {
+    async getData() {
       this.loading = true;
-      axios
-        .get(`${api.url}/about`, {
-          params: {
-            _locale: localStorage.getItem("language") ?? "en",
-          },
-        })
-        .then((res) => (this.text = res.data.text))
-        .catch(api.handleError())
-        .finally(() => this.loading = false);
+      this.data = await api.get('about');
+      this.loading = false;
     },
   },
   mounted() {
