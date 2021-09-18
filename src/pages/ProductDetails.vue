@@ -33,7 +33,6 @@ export default {
     return {
       product: null,
       loading: false,
-      apiUrl: 'http://localhost:1337'
     };
   },
   components: { Table },

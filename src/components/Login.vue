@@ -2,9 +2,9 @@
   <div class="page">
     <div class="login-form">
       <img src="@/assets/logo.png" />
-      <input type="email" name="" id="" v-model="form.email" placeholder="email" />
-      <input type="password" name="" id="" v-model="form.pass" placeholder="password" />
-      <button>Login</button>
+      <input type="email" name="" id="email" v-model="form.email" placeholder="email" />
+      <input type="password" name="" id="password" v-model="form.pass" placeholder="password" />
+      <button @click="doLogin(form.email, form.pass)">Login</button>
     </div>
   </div>
 </template>
@@ -19,7 +19,8 @@ export default {
               pass: ''
           }
       }
-  }
+  },
+  inject: ["doLogin"]
 };
 </script>
 
